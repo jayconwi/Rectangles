@@ -10,20 +10,23 @@ using System.Windows.Forms;
 namespace Rectangles.Test
 {
     [TestClass]
-    public class GridHelperTest
+    public class PanelDrawHelperTest
     {
         private Mock<Form> _formMock = new Mock<Form>();
-        private GridHelper _gridHelper;
+        private readonly ControlDrawHelper<Panel> _panelDrawHelper;
 
-        public GridHelperTest()
+        public PanelDrawHelperTest()
         {
+
+            Graphics graphics = _formMock.Object.CreateGraphics();
+
             Panel panel = new Panel()
             {
                 Width = 250,
                 Height = 250
             };
 
-            _gridHelper = new GridHelper(_formMock.Object.CreateGraphics(), panel);
+            _panelDrawHelper = new PanelDrawHelper(graphics, panel);
         }
 
         [TestMethod]
@@ -31,7 +34,7 @@ namespace Rectangles.Test
         {
             try
             {
-                _gridHelper.DrawGridLines();
+                _panelDrawHelper.DrawGridLines();
                 return;
             }
             catch (Exception ex)

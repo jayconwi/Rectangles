@@ -1,17 +1,17 @@
 ﻿namespace Rectangles.Helpers
 {
-    public class GridHelper
+    public class PanelDrawHelper : ControlDrawHelper<Panel>
     {
         private Graphics _graphics;
         private Panel _panel;
 
-        public GridHelper(Graphics graphics, Panel panel)
+        public PanelDrawHelper(Graphics graphics, Panel panel)
         {
             _graphics = graphics;
             _panel = panel;
         }
 
-        public void DrawGridLines()
+        public override void DrawGridLines()
         {
             Pen pen = new Pen(Color.LightGray, 1.0F);
 

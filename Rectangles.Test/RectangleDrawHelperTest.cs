@@ -9,14 +9,16 @@ using System.Windows.Forms;
 namespace Rectangles.Test
 {
     [TestClass]
-    public class RectangleHelperTest
+    public class RectangleDrawHelperTest
     {
         private Mock<Form> _formMock = new Mock<Form>();
-        private RectangleHelper _rectangleHelper;
+        private ShapeDrawHelper<Rectangle> _rectangleDrawHelper;
         private List<Rectangle> _rectangleList;
 
-        public RectangleHelperTest()
+        public RectangleDrawHelperTest()
         {
+            Graphics graphics = _formMock.Object.CreateGraphics();
+
             Panel panel = new Panel()
             {
                 Width = 25,
@@ -24,28 +26,29 @@ namespace Rectangles.Test
             };
 
             _rectangleList = new List<Rectangle>();
-            _rectangleHelper = new RectangleHelper(_formMock.Object.CreateGraphics(), panel, _rectangleList);
+
+            _rectangleDrawHelper = new RectangleDrawHelper(graphics, panel, _rectangleList);
         }
 
         [TestMethod]
         public void TestAddRect()
         {
-            _rectangleHelper.AddRect(new Point(2, 2), new Size(2, 3));
+            _rectangleDrawHelper.Add(new Point(2, 2), new Size(2, 3));
             Assert.IsTrue(_rectangleList.Count == 1);
         }
 
         [TestMethod]
         public void TestAddRectOverlap()
         {
-            _rectangleHelper.AddRect(new Point(1, 2), new Size(2, 3));
-            _rectangleHelper.AddRect(new Point(2, 2), new Size(2, 3));
+            _rectangleDrawHelper.Add(new Point(1, 2), new Size(2, 3));
+            _rectangleDrawHelper.Add(new Point(2, 2), new Size(2, 3));
             Assert.IsTrue(_rectangleList.Count == 1);
         }
 
         [TestMethod]
         public void TestAddRectExceedGrid()
         {
-            _rectangleHelper.AddRect(new Point(25, 2), new Size(2, 3));
+            _rectangleDrawHelper.Add(new Point(25, 2), new Size(2, 3));
             Assert.IsFalse(_rectangleList.Any());
         }
 
@@ -53,17 +56,17 @@ namespace Rectangles.Test
         [TestMethod]
         public void TestFindRect()
         {
-            _rectangleHelper.AddRect(new Point(2, 2), new Size(2, 3));
+            _rectangleDrawHelper.Add(new Point(2, 2), new Size(2, 3));
             Assert.IsTrue(_rectangleList.Any());
         }
 
         [TestMethod]
         public void TestRemoveRect()
         {
-            _rectangleHelper.AddRect(new Point(2, 2), new Size(2, 3));
+            _rectangleDrawHelper.Add(new Point(2, 2), new Size(2, 3));
             if (_rectangleList.Any())
             {
-                bool removeResult = _rectangleHelper.RemoveRect(new Point(2, 2), new Size(2, 3));
+                bool removeResult = _rectangleDrawHelper.Remove(new Point(2, 2), new Size(2, 3));
                 Assert.IsTrue(removeResult);
             }
 
@@ -72,10 +75,10 @@ namespace Rectangles.Test
         [TestMethod]
         public void TestClearRect()
         {
-            _rectangleHelper.AddRect(new Point(2, 2), new Size(2, 3));
+            _rectangleDrawHelper.Add(new Point(2, 2), new Size(2, 3));
             if (_rectangleList.Any())
             {
-                bool removeResult = _rectangleHelper.ClearRect();
+                bool removeResult = _rectangleDrawHelper.Clear();
                 Assert.IsTrue(removeResult);
             }
 

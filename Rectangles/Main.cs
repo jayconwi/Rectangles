@@ -4,8 +4,8 @@ namespace Rectangles
 {
     public partial class Main : Form
     {
-        private GridHelper _gridHelper;
-        private RectangleHelper _rectangleHelper;
+        private ControlDrawHelper<Panel> _panelDrawHelper;
+        private ShapeDrawHelper<Rectangle> _rectangleDrawHelper;
 
         private List<Rectangle> _rectangleList;
 
@@ -23,20 +23,20 @@ namespace Rectangles
             panelGrid.Width = 250;
             panelGrid.Height = 250;
 
-            _gridHelper = new GridHelper(e.Graphics, panelGrid);
-            _rectangleHelper = new RectangleHelper(e.Graphics, panelGrid, _rectangleList);
+            _panelDrawHelper = new PanelDrawHelper(e.Graphics, panelGrid);
+            _rectangleDrawHelper = new RectangleDrawHelper(e.Graphics, panelGrid, _rectangleList);
 
-            _gridHelper.DrawGridLines();
+            _panelDrawHelper.DrawGridLines();
            
             foreach (Rectangle rectangle in _rectangleList)
-                _rectangleHelper.DrawRect(rectangle);
+                _rectangleDrawHelper.Draw(rectangle);
 
             e.Graphics.Dispose();
         }
 
         private void buttonAdd_Click(object sender, EventArgs e)
         {
-            if (_rectangleHelper.AddRect(Location, Size))
+            if (_rectangleDrawHelper.Add(Location, Size))
                 panelGrid.Invalidate();
             else
                 MessageBox.Show("The rectangle you are creating might be overlaping with another\n\ror might be exceeding the grid.");
@@ -44,7 +44,7 @@ namespace Rectangles
 
         private void buttonFind_Click(object sender, EventArgs e)
         {
-            Rectangle? rectangle = _rectangleHelper.FindRect(Location, Size);
+            Rectangle? rectangle = _rectangleDrawHelper.Find(Location, Size);
             if (rectangle != null)
             {
                 int x = ((Rectangle)rectangle).X / 10;
@@ -59,13 +59,13 @@ namespace Rectangles
 
         private void buttonRemove_Click(object sender, EventArgs e)
         {
-            if (_rectangleHelper.RemoveRect(Location, Size))
+            if (_rectangleDrawHelper.Remove(Location, Size))
                 panelGrid.Invalidate();
         }
 
         private void buttonClear_Click(object sender, EventArgs e)
         {
-            if (_rectangleHelper.ClearRect())
+            if (_rectangleDrawHelper.Clear())
                 panelGrid.Invalidate();
         }
 
