@@ -17,7 +17,6 @@ namespace Rectangles.Test
 
         public PanelDrawHelperTest()
         {
-
             Graphics graphics = _formMock.Object.CreateGraphics();
 
             Panel panel = new Panel()

@@ -30,7 +30,7 @@
         {
             this.panelGrid = new System.Windows.Forms.Panel();
             this.buttonAdd = new System.Windows.Forms.Button();
-            this.textPosition = new System.Windows.Forms.TextBox();
+            this.textLocation = new System.Windows.Forms.TextBox();
             this.textSize = new System.Windows.Forms.TextBox();
             this.labelPosition = new System.Windows.Forms.Label();
             this.labelSize = new System.Windows.Forms.Label();
@@ -58,13 +58,13 @@
             this.buttonAdd.UseVisualStyleBackColor = true;
             this.buttonAdd.Click += new System.EventHandler(this.buttonAdd_Click);
             // 
-            // textPosition
+            // textLocation
             // 
-            this.textPosition.Location = new System.Drawing.Point(268, 30);
-            this.textPosition.Name = "textPosition";
-            this.textPosition.Size = new System.Drawing.Size(73, 23);
-            this.textPosition.TabIndex = 2;
-            this.textPosition.Text = "2,2";
+            this.textLocation.Location = new System.Drawing.Point(268, 30);
+            this.textLocation.Name = "textLocation";
+            this.textLocation.Size = new System.Drawing.Size(73, 23);
+            this.textLocation.TabIndex = 2;
+            this.textLocation.Text = "2,2";
             // 
             // textSize
             // 
@@ -79,9 +79,9 @@
             this.labelPosition.AutoSize = true;
             this.labelPosition.Location = new System.Drawing.Point(268, 12);
             this.labelPosition.Name = "labelPosition";
-            this.labelPosition.Size = new System.Drawing.Size(50, 15);
+            this.labelPosition.Size = new System.Drawing.Size(53, 15);
             this.labelPosition.TabIndex = 10;
-            this.labelPosition.Text = "Position";
+            this.labelPosition.Text = "Location";
             // 
             // labelSize
             // 
@@ -133,7 +133,7 @@
             this.Controls.Add(this.labelSize);
             this.Controls.Add(this.labelPosition);
             this.Controls.Add(this.textSize);
-            this.Controls.Add(this.textPosition);
+            this.Controls.Add(this.textLocation);
             this.Controls.Add(this.buttonAdd);
             this.Controls.Add(this.panelGrid);
             this.Name = "Main";
@@ -147,7 +147,7 @@
 
         private Panel panelGrid;
         private Button buttonAdd;
-        private TextBox textPosition;
+        private TextBox textLocation;
         private TextBox textSize;
         private Label labelPosition;
         private Label labelSize;

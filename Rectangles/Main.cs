@@ -77,7 +77,7 @@ namespace Rectangles
         {
             get
             {
-                string[] position = textPosition.Text.Trim().Split(',');
+                string[] position = textLocation.Text.Trim().Split(',');
                 return new Point(int.Parse(position[0]) * 10, int.Parse(position[1]) * 10);
             }
         }
